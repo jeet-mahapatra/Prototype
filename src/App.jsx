@@ -1,13 +1,13 @@
 import React from 'react';
 import { AuthProvider } from './context/AuthContext';
 import { IssuesProvider } from './context/IssuesContext';
-import Dashboard from './pages/Dashboard';
+import AppRouter from './router/AppRouter';
 
 function App() {
   return (
     <AuthProvider>
       <IssuesProvider>
-        <Dashboard />
+         <AppRouter />
       </IssuesProvider>
     </AuthProvider>
   );

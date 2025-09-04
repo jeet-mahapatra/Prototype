@@ -1,14 +1,17 @@
 import React from 'react';
 import { useAuthContext } from '../../context/AuthContext';
 
-const IssueCard = ({ issue, onStatusChange }) => {
+const IssueCard = ({ issue, onStatusChange, reporterName }) => {
   const { user } = useAuthContext();
   
   const getStatusColor = (status) => {
     switch (status) {
-      case 'pending': return 'bg-yellow-100 text-yellow-800';
+  case 'pending': return 'bg-yellow-100 text-yellow-800';
+  case 'submitted': return 'bg-yellow-100 text-yellow-800';
+  case 'acknowledged': return 'bg-indigo-100 text-indigo-800';
       case 'in-progress': return 'bg-blue-100 text-blue-800';
       case 'resolved': return 'bg-green-100 text-green-800';
+  case 'closed': return 'bg-gray-100 text-gray-800';
       case 'rejected': return 'bg-red-100 text-red-800';
       default: return 'bg-gray-100 text-gray-800';
     }
@@ -78,7 +81,7 @@ const IssueCard = ({ issue, onStatusChange }) => {
         <div className="flex items-center text-sm text-gray-600">
           <span className="font-medium mr-2">Reported by:</span>
           <span>
-            {canViewUserDetails() ? issue.userName : 'Citizen'}
+            {canViewUserDetails() ? (reporterName || issue.userName || `User #${issue.userId}`) : 'Citizen'}
           </span>
         </div>
       </div>
@@ -91,9 +94,12 @@ const IssueCard = ({ issue, onStatusChange }) => {
             onChange={(e) => onStatusChange(issue.id, e.target.value)}
             className="px-3 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
+            <option value="submitted">Submitted</option>
+            <option value="acknowledged">Acknowledged</option>
             <option value="pending">Pending</option>
             <option value="in-progress">In Progress</option>
             <option value="resolved">Resolved</option>
+            <option value="closed">Closed</option>
             <option value="rejected">Rejected</option>
           </select>
         </div>

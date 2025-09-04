@@ -131,6 +131,34 @@ class IssuesService {
     }
   }
 
+  async addComment(id, comment) {
+    try {
+      const issue = await this.getIssueById(id);
+      const newComment = {
+        id: generateId(),
+        ...comment,
+        timestamp: new Date().toISOString()
+      };
+      const updatedComments = [...(issue.comments || []), newComment];
+      return this.updateIssue(id, { comments: updatedComments });
+    } catch (error) {
+      console.error('Error adding comment:', error);
+      throw error;
+    }
+  }
+
+  async assignIssue(id, { assignedTo, departmentId }) {
+    try {
+      const payload = {};
+      if (assignedTo !== undefined) payload.assignedTo = assignedTo;
+      if (departmentId !== undefined) payload.departmentId = departmentId;
+      return this.updateIssue(id, payload);
+    } catch (error) {
+      console.error('Error assigning issue:', error);
+      throw error;
+    }
+  }
+
   async upvoteIssue(id) {
     try {
       const issue = await this.getIssueById(id);

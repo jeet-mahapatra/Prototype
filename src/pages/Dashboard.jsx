@@ -1,5 +1,4 @@
 import React from 'react';
-import Layout from '../components/layout/Layout';
 import StatsCards from '../components/dashboard/StatsCards';
 import IssuesList from '../components/dashboard/IssuesList';
 import ReportIssueForm from '../components/ReportIssueForm';
@@ -11,7 +10,6 @@ const Dashboard = () => {
   const { isAuthenticated, user } = useAuthContext();
 
   return (
-    <Layout>
       <div className="bg-gray-100 min-h-screen">
         {/* Hero Section */}
         <div className="bg-blue-600 text-white py-12">
@@ -82,8 +80,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-      </div>
-    </Layout>
+  </div>
   );
 };
 
