@@ -1,0 +1,10 @@
+{
+  "users": [
+    { "id": 1, "name": "Jeet", "email": "jeet@example.com" },
+    { "id": 2, "name": "Thomas", "email": "thomas@example.com" }
+  ],
+  "posts": [
+    { "id": 1, "title": "Hello World", "author": "Jeet" },
+    { "id": 2, "title": "Learning JSON Server", "author": "Thomas" }
+  ]
+}
